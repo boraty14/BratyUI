@@ -1,5 +1,5 @@
 {
-    "name": "BratyUIEditor",
+    "name": "BratyUI.Editor",
     "rootNamespace": "",
     "references": [
         "GUID:592a2e4f45bf41749aa07df813dc08ad"
