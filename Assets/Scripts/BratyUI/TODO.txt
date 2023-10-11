@@ -1,0 +1,52 @@
+﻿This is a special use case for mobile though it should be
+pretty ok with other platforms as well.
+
+========== TODO ==========
+
+2 -> Scroll
+
+make it scrollable
+add inertia (scrolling with ease after release)
+scroll animation after end
+make it poolable
+grid / list adaptation
+list = horizontal/vertical
+grid = can be pivoted from 9 directions
+tree view
+
+3 -> Texts
+
+Shouldnt be anything unusal or extra???
+
+4 -> Elements
+- Canvas / background
+- Toggle group / selection
+- Tab
+- Dropdown
+- Slider
+- layouts
+- tooltip
+- mask
+- soft mask?
+- stretch / anchor
+
+5 -> Popup system
+
+
+========== DONE ==========
+
+
+1 -> Button
+
+Add button press options:
+- color swap
+- size change
+- sprite change
+
+States:
+- normal
+- highlighted
+- pressed
+- selected
+- disabled
+
