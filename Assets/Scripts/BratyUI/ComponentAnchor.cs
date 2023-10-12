@@ -3,14 +3,30 @@ using UnityEngine;
 
 namespace BratyUI
 {
+    [ExecuteAlways]
     [DisallowMultipleComponent]
     public class ComponentAnchor : MonoBehaviour
     {
-        [SerializeField] [ShowOnly] private Camera _referenceCamera;
-        [SerializeField] [Range(0f, 1f)] private float _scaleHorizontalWeight;
-        [SerializeField] private Vector2 _anchorPoint;
+        [SerializeField] [ShowOnly] private Transform _transform;
+        [SerializeField] private Vector2 _anchorPoint = Vector2.one * 0.5f;
+        [SerializeField] private Vector2 _offset;
 
         private void Awake()
+        {
+            SetAnchorPosition();
+        }
+
+        private void OnEnable()
+        {
+            BratyUIEvents.OnCameraUpdate += OnCameraUpdate;
+        }
+
+        private void OnDisable()
+        {
+            BratyUIEvents.OnCameraUpdate -= OnCameraUpdate;
+        }
+
+        private void OnCameraUpdate()
         {
             SetAnchorPosition();
         }
@@ -22,25 +38,23 @@ namespace BratyUI
 
         private void SetAnchorPosition()
         {
-            if (_referenceCamera == null && !TrySettingCamera())
-            {
-                return;
-            }
-            
-            
+            SetTransform();
+            Vector2 anchoredPosition;
+            var referenceCamera = BratyCamera.Instance.ReferenceCamera;
+            float orthographicSize = referenceCamera.orthographicSize;
+            anchoredPosition.x = referenceCamera.aspect * orthographicSize * 2f * (_anchorPoint.x - 0.5f);
+            anchoredPosition.y = orthographicSize * 2f * (_anchorPoint.y - 0.5f);
+            anchoredPosition.x += _offset.x; 
+            anchoredPosition.y += _offset.y;
+            _transform.position = anchoredPosition;
         }
 
-        private bool TrySettingCamera()
+        private void SetTransform()
         {
-            var refCamera = FindFirstObjectByType<BratyCamera>().GetReferenceCamera();
-            if (refCamera == null)
+            if (_transform == null)
             {
-                Debug.LogError("Camera not found for anchoring");
-                return false;
+                _transform = GetComponent<Transform>();
             }
-
-            _referenceCamera = refCamera;
-            return true;
         }
     }
 }

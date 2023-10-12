@@ -4,38 +4,64 @@ using UnityEngine;
 
 namespace BratyUI
 {
+    [ExecuteAlways]
     [DefaultExecutionOrder(-100)]
     [RequireComponent(typeof(Camera))]
-    [RequireComponent(typeof(ResolutionChangeHandler))]
-    public class BratyCamera : MonoBehaviourSingletonPersistent<BratyCamera>
+    public class BratyCamera : MonoBehaviourSingleton<BratyCamera>
     {
         [SerializeField] [ShowOnly] private Camera _camera;
         [SerializeField] private float _size;
         [SerializeField] [Range(0f, 1f)] private float _horizontalWeight;
+        private int _lastScreenWidth;
+        private int _lastScreenHeight;
 
-        public Camera GetReferenceCamera() => _camera;
-
-        public override void Awake()
+        public Camera ReferenceCamera
         {
-            base.Awake();
-            _camera = GetComponent<Camera>();
+            get
+            {
+                if (_camera == null)
+                {
+                    _camera = GetComponent<Camera>();
+                }
+
+                return _camera;
+            }
+        }
+
+        private void Awake()
+        {
             SetCameraSize();
         }
 
         private void OnValidate()
         {
-            if (_camera == null)
-            {
-                _camera = GetComponent<Camera>();
-            }
             SetCameraSize();
+        }
+
+        private void Update()
+        {
+            CheckResolutionChange();
+        }
+
+        private void CheckResolutionChange()
+        {
+            if (_lastScreenWidth != ReferenceCamera.pixelWidth ||
+                _lastScreenHeight != ReferenceCamera.pixelHeight)
+            {
+                SetCameraSize();
+                Debug.Log(
+                    $"Resolution changed! New resolution is {_lastScreenWidth}x{_lastScreenHeight} Aspect ratio: {ReferenceCamera.aspect}");
+            }
         }
 
         private void SetCameraSize()
         {
-            float horizontalSize = (1f / _camera.aspect) * _size;
+            _lastScreenWidth = ReferenceCamera.pixelWidth;
+            _lastScreenHeight = ReferenceCamera.pixelHeight;
+            float horizontalSize = (1f / ReferenceCamera.aspect) * _size;
             float cameraSize = Mathf.Lerp(_size, horizontalSize, _horizontalWeight);
-            _camera.orthographicSize = cameraSize;
+            ReferenceCamera.orthographicSize = cameraSize;
+            BratyUIEvents.OnCameraUpdate?.Invoke();
         }
     }
 }
