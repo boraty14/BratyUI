@@ -24,6 +24,10 @@ namespace BratyUI
 
         private void OnValidate()
         {
+            if (_camera == null)
+            {
+                _camera = GetComponent<Camera>();
+            }
             SetCameraSize();
         }
 

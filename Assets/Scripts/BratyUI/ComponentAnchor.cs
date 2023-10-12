@@ -26,6 +26,8 @@ namespace BratyUI
             {
                 return;
             }
+            
+            
         }
 
         private bool TrySettingCamera()

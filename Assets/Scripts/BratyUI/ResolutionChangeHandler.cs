@@ -30,6 +30,7 @@ namespace BratyUI
                 _lastScreenWidth = _camera.pixelWidth;
                 _lastScreenHeight = _camera.pixelHeight;
                 BratyUIEvents.OnResolutionChange?.Invoke();
+                Debug.Log($"Resolution changed! New resolution is {_lastScreenWidth}x{_lastScreenHeight}");
             }
         }
     }
