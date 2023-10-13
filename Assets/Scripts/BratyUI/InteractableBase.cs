@@ -8,8 +8,9 @@ namespace BratyUI
     {
         [SerializeField] [ShowOnly] protected Collider2D InteractionCollider;
 
-        protected virtual void OnValidate()
+        protected override void OnValidate()
         {
+            base.OnValidate();
             if (InteractionCollider == null)
             {
                 InteractionCollider = GetComponent<Collider2D>();

@@ -1,13 +1,16 @@
 using System;
+using BratyUI.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace BratyUI
 {
+    [ExecuteAlways]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class Button : InteractableBase, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
         IPointerExitHandler
     {
-        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] [ShowOnly] private SpriteRenderer _renderer;
         [SerializeField] protected ButtonAnimationSettings AnimationSettings;
         protected EButtonState ButtonState = EButtonState.Normal;
         public Action OnClicked;
@@ -61,6 +64,11 @@ namespace BratyUI
                 _renderer.sprite = animationSettings.Sprite;
             }
             ButtonState = buttonState;
+        }
+
+        private void Update()
+        {
+            
         }
 
         public void OnPointerClick(PointerEventData eventData)
