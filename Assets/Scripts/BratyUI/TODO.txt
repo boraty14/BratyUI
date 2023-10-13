@@ -14,13 +14,11 @@ list = horizontal/vertical
 grid = can be pivoted from 9 directions
 tree view
 
-3 -> Texts
-
-Shouldnt be anything unusal or extra???
 
 4 -> Elements
 - Canvas / background
 - Toggle group / selection
+- Image (default sprite renderer)
 - Tab
 - Dropdown
 - Slider
@@ -50,3 +48,6 @@ States:
 - selected
 - disabled
 
+3 -> Texts
+
+Shouldnt be anything unusal or extra???
