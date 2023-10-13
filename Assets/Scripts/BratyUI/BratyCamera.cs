@@ -1,12 +1,14 @@
 using BratyUI.Attributes;
 using BratyUI.Helpers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BratyUI
 {
     [ExecuteAlways]
     [DefaultExecutionOrder(-100)]
     [RequireComponent(typeof(Camera))]
+    [RequireComponent(typeof(Physics2DRaycaster))]
     public class BratyCamera : MonoBehaviourSingleton<BratyCamera>
     {
         [SerializeField] [ShowOnly] private Camera _camera;

@@ -33,6 +33,17 @@ namespace BratyUI.Editor
             CreateComponent(go, menuCommand);
         }
 
+        [MenuItem("GameObject/BratyUI/TextInput", false, 10)]
+        private static void CreateTextInput(MenuCommand menuCommand)
+        {
+            // Create a custom game object
+            GameObject go = new GameObject("TextInput");
+            go.AddComponent<BoxCollider2D>();
+            go.AddComponent<TextInput>();
+            CreateComponent(go, menuCommand);
+            
+        }
+
         private static void CreateComponent(GameObject go, MenuCommand menuCommand)
         {
             // Ensure it gets reparented if this was a context click (otherwise does nothing)

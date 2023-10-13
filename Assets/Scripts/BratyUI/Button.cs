@@ -7,14 +7,24 @@ namespace BratyUI
     public class Button : InteractableBase, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
         IPointerExitHandler
     {
-        protected EButtonState ButtonState = EButtonState.Normal;
+        [SerializeField] private SpriteRenderer _renderer;
         [SerializeField] protected ButtonAnimationSettings AnimationSettings;
+        protected EButtonState ButtonState = EButtonState.Normal;
         public Action OnClicked;
 
         private void Awake()
         {
             var state = InteractionCollider.enabled ? EButtonState.Normal : EButtonState.Disabled;
             SetButtonState(state);
+        }
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            if (_renderer == null)
+            {
+                _renderer = GetComponent<SpriteRenderer>();
+            }
         }
 
         public void EnableButton()
@@ -44,11 +54,11 @@ namespace BratyUI
             }
             if (AnimationSettings.IsChangingColor)
             {
-                GetRenderer().color = animationSettings.Color;
+                _renderer.color = animationSettings.Color;
             }
             if (AnimationSettings.IsChangingSprite)
             {
-                GetRenderer().sprite = animationSettings.Sprite;
+                _renderer.sprite = animationSettings.Sprite;
             }
             ButtonState = buttonState;
         }
