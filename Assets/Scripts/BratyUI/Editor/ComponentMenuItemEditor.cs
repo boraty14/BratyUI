@@ -28,7 +28,7 @@ namespace BratyUI.Editor
         {
             // Create a custom game object
             GameObject go = new GameObject("Button");
-            go.AddComponent<CapsuleCollider2D>();
+            go.AddComponent<BoxCollider2D>();
             go.AddComponent<Button>();
             CreateComponent(go, menuCommand);
         }

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 namespace BratyUI
 {
-    [ExecuteAlways]
     [RequireComponent(typeof(SpriteRenderer))]
     public class Button : InteractableBase, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
         IPointerExitHandler
@@ -64,11 +63,6 @@ namespace BratyUI
                 _renderer.sprite = animationSettings.Sprite;
             }
             ButtonState = buttonState;
-        }
-
-        private void Update()
-        {
-            
         }
 
         public void OnPointerClick(PointerEventData eventData)
