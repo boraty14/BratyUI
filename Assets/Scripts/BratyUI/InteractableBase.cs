@@ -3,18 +3,23 @@ using UnityEngine;
 
 namespace BratyUI
 {
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public abstract class InteractableBase : ComponentBase
     {
-        [SerializeField] [ShowOnly] protected Collider2D InteractionCollider;
+        [SerializeField] [ShowOnly] private BoxCollider2D _collider;
 
-        protected override void OnValidate()
+        public BoxCollider2D InteractionCollider
         {
-            base.OnValidate();
-            if (InteractionCollider == null)
+            get
             {
-                InteractionCollider = GetComponent<Collider2D>();
-                InteractionCollider.isTrigger = true;
+                if (_collider == null)
+                {
+                    _collider = GetComponent<BoxCollider2D>();
+                    _collider.size = ComponentRenderer.bounds.size;
+                    _collider.isTrigger = true;
+                }
+
+                return _collider;
             }
         }
     }

@@ -37,7 +37,7 @@ namespace BratyUI
 
             if (_rectTransform == null)
             {
-                _rectTransform = GetTransform() as RectTransform;
+                _rectTransform = Transform as RectTransform;
             }
 
             if (_inputCollider == null)

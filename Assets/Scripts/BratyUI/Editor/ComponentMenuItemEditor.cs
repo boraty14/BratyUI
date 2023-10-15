@@ -28,7 +28,6 @@ namespace BratyUI.Editor
         {
             // Create a custom game object
             GameObject go = new GameObject("Button");
-            go.AddComponent<BoxCollider2D>();
             go.AddComponent<Button>();
             CreateComponent(go, menuCommand);
         }
@@ -41,7 +40,15 @@ namespace BratyUI.Editor
             go.AddComponent<BoxCollider2D>();
             go.AddComponent<TextInput>();
             CreateComponent(go, menuCommand);
-            
+        }
+
+        [MenuItem("GameObject/BratyUI/Image", false, 10)]
+        private static void CreateImage(MenuCommand menuCommand)
+        {
+            // Create a custom game object
+            GameObject go = new GameObject("Image");
+            go.AddComponent<Image>();
+            CreateComponent(go, menuCommand);
         }
 
         private static void CreateComponent(GameObject go, MenuCommand menuCommand)

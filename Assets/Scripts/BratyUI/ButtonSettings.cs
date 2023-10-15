@@ -10,11 +10,11 @@ namespace BratyUI
         public bool IsChangingColor = false;
         public bool IsChangingSprite = false;
         
-        public ButtonStateSettings Normal;
-        public ButtonStateSettings Highlighted;
-        public ButtonStateSettings Pressed;
-        public ButtonStateSettings Selected;
-        public ButtonStateSettings Disabled;
+        public ButtonStateSettings Normal = new();
+        public ButtonStateSettings Highlighted = new();
+        public ButtonStateSettings Pressed = new();
+        public ButtonStateSettings Selected = new();
+        public ButtonStateSettings Disabled = new();
 
         public ButtonStateSettings GetStateAnimationSettings(EButtonState buttonState)
         {

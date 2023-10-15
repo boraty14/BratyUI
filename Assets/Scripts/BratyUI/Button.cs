@@ -1,5 +1,4 @@
 using System;
-using BratyUI.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,26 +8,28 @@ namespace BratyUI
     public class Button : InteractableBase, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
         IPointerExitHandler
     {
-        [SerializeField] [ShowOnly] private SpriteRenderer _renderer;
-        [SerializeField] protected ButtonAnimationSettings AnimationSettings;
+        [SerializeField] protected ButtonAnimationSettings AnimationSettings = new();
         protected EButtonState ButtonState = EButtonState.Normal;
         public Action OnClicked;
 
-        private void Awake()
+        protected override void Awake()
         {
-            var state = InteractionCollider.enabled ? EButtonState.Normal : EButtonState.Disabled;
-            SetButtonState(state);
+            base.Awake();
+            InitButton();
         }
 
         protected override void OnValidate()
         {
             base.OnValidate();
-            if (_renderer == null)
-            {
-                _renderer = GetComponent<SpriteRenderer>();
-            }
+            InitButton();
         }
 
+        private void InitButton()
+        {
+            var state = InteractionCollider.enabled ? EButtonState.Normal : EButtonState.Disabled;
+            SetButtonState(state);
+        }
+        
         public void EnableButton()
         {
             InteractionCollider.enabled = true;
@@ -52,15 +53,15 @@ namespace BratyUI
             var animationSettings = AnimationSettings.GetStateAnimationSettings(buttonState);
             if (AnimationSettings.IsChangingSize)
             {
-                GetTransform().localScale = animationSettings.Size * Vector3.one;
+                Transform.localScale = animationSettings.Size * Vector3.one;
             }
             if (AnimationSettings.IsChangingColor)
             {
-                _renderer.color = animationSettings.Color;
+                ComponentRenderer.color = animationSettings.Color;
             }
             if (AnimationSettings.IsChangingSprite)
             {
-                _renderer.sprite = animationSettings.Sprite;
+                ComponentRenderer.sprite = animationSettings.Sprite;
             }
             ButtonState = buttonState;
         }

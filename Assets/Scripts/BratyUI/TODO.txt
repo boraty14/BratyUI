@@ -3,6 +3,14 @@ pretty ok with other platforms as well.
 
 ========== TODO ==========
 
+PAIN POINTS
+
+- SCROLL!!!
+- stretching image
+
+make everything have sprite renderer ???
+
+
 2 -> Scroll
 
 make it scrollable
@@ -16,7 +24,7 @@ tree view
 
 
 4 -> Elements
-- Canvas
+- Canvas +
 - Background
 - Toggle group / selection
 - Image (default sprite renderer)
@@ -27,13 +35,12 @@ tree view
 - tooltip
 - mask
 - soft mask?
-- stretch / anchor
+- stretch
+- anchor +
 
 5 -> Popup system
 
-
 ========== DONE ==========
-
 
 1 -> Button
 
