@@ -16,7 +16,8 @@ tree view
 
 
 4 -> Elements
-- Canvas / background
+- Canvas
+- Background
 - Toggle group / selection
 - Image (default sprite renderer)
 - Tab

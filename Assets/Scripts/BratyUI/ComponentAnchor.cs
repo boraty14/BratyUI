@@ -10,6 +10,20 @@ namespace BratyUI
         [SerializeField] [ShowOnly] private Transform _transform;
         [SerializeField] private Vector2 _anchorPoint = Vector2.one * 0.5f;
         [SerializeField] private Vector2 _offset;
+        private Vector3 _lastPosition;
+
+        private Transform AnchorTransform
+        {
+            get
+            {
+                if (_transform == null)
+                {
+                    _transform = GetComponent<Transform>();
+                }
+
+                return _transform;
+            }
+        }
 
         private void Awake()
         {
@@ -38,7 +52,6 @@ namespace BratyUI
 
         private void SetAnchorPosition()
         {
-            SetTransform();
             Vector2 anchoredPosition;
             var referenceCamera = BratyCamera.Instance.ReferenceCamera;
             float orthographicSize = referenceCamera.orthographicSize;
@@ -46,15 +59,7 @@ namespace BratyUI
             anchoredPosition.y = orthographicSize * 2f * (_anchorPoint.y - 0.5f);
             anchoredPosition.x += _offset.x; 
             anchoredPosition.y += _offset.y;
-            _transform.position = anchoredPosition;
-        }
-
-        private void SetTransform()
-        {
-            if (_transform == null)
-            {
-                _transform = GetComponent<Transform>();
-            }
+            AnchorTransform.position = anchoredPosition;
         }
     }
 }
