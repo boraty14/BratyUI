@@ -73,7 +73,7 @@ namespace BratyUI
                 {
                     continue;
                 }
-                child.SetAnchoredPosition();       
+                child.UpdateUI();
             }
         }
 

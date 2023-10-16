@@ -5,7 +5,6 @@ pretty ok with other platforms as well.
 
 PAIN POINTS
 
-- CHILD ELEMENT!!!!!!!!!
 - SCROLL!!!
 - stretching image
 
