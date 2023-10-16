@@ -14,16 +14,17 @@ namespace BratyUI.Helpers
             float orthographicSize = referenceCamera.orthographicSize;
             float verticalScreenSize = orthographicSize;
             float horizontalScreenSize = orthographicSize * referenceCamera.aspect;
-            
-            // set position
+
+            // set position and pivot
             anchoredPosition.x = horizontalScreenSize * 2f * (anchorSettings.CurrentAnchor.x - 0.5f);
             anchoredPosition.x += anchorSettings.AnchoredPosition.x;
             anchoredPosition.y = verticalScreenSize * 2f * (anchorSettings.CurrentAnchor.y - 0.5f);
             anchoredPosition.y += anchorSettings.AnchoredPosition.y;
             uiShape.Position = anchoredPosition;
-            
+
             // set scale
-            uiShape.Scale = new Vector3(anchorSettings.Scale.x,anchorSettings.Scale.y,1f);
+            uiShape.Scale = new Vector3(anchorSettings.Scale.x * rendererSize.x,
+                anchorSettings.Scale.y * rendererSize.y, 1f);
 
             if (anchorSettings.HorizontalAnchorDistance > Tolerance)
             {
@@ -31,14 +32,24 @@ namespace BratyUI.Helpers
                 float horizontalScale = horizontalItemSize / rendererSize.x;
                 uiShape.Scale.x *= horizontalScale;
             }
-            
+            // set pivot
+            else
+            {
+                   
+            }
+
             if (anchorSettings.VerticalAnchorDistance > Tolerance)
             {
                 float verticalItemSize = anchorSettings.VerticalAnchorDistance * verticalScreenSize * 2f;
                 float verticalScale = verticalItemSize / rendererSize.y;
                 uiShape.Scale.y *= verticalScale;
+            }
+            // set pivot
+            else
+            {
                 
             }
+            
             return uiShape;
         }
     }

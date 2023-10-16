@@ -1,4 +1,3 @@
-using System;
 using BratyUI.Attributes;
 using BratyUI.Helpers;
 using UnityEngine;
@@ -43,15 +42,13 @@ namespace BratyUI
         {
             var uiShape = GetComponentUIShape();
             Transform.position = uiShape.Position;
-            Transform.localScale = uiShape.Scale;
+            ComponentRenderer.size = uiShape.Scale;
         }
 
-        public UIShape GetComponentUIShape()
+        private UIShape GetComponentUIShape()
         {
-            Vector2 rendererSize = ComponentRenderer.bounds.size;
-            var localScale = Transform.localScale;
-            rendererSize.x /= localScale.x;
-            rendererSize.y /= localScale.y;
+            var imageTexture = ComponentRenderer.sprite.texture;
+            Vector2 rendererSize = new Vector2(imageTexture.width / 100f, imageTexture.height / 100f);
             var result = AnchorHelper.GetComponentUIShape(_anchorSettings,rendererSize);
             return result;
         }
@@ -76,6 +73,7 @@ namespace BratyUI
                 if (_spriteRenderer == null)
                 {
                     _spriteRenderer = GetComponent<SpriteRenderer>();
+                    _spriteRenderer.drawMode = SpriteDrawMode.Sliced;
                     _spriteRenderer.sprite = Resources.Load<Sprite>("Textures/White_64x64");
                     //_spriteRenderer.sprite = Resources.Load<Sprite>("Textures/download-removebg-preview");
                 }

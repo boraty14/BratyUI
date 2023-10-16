@@ -53,7 +53,7 @@ namespace BratyUI
             var animationSettings = AnimationSettings.GetStateAnimationSettings(buttonState);
             if (AnimationSettings.IsChangingSize)
             {
-                Transform.localScale = animationSettings.Size * GetComponentUIShape().Scale;
+                Transform.localScale = animationSettings.Size * Vector3.one;
             }
             if (AnimationSettings.IsChangingColor)
             {

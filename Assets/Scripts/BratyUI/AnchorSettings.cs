@@ -8,6 +8,7 @@ namespace BratyUI
     {
         public Vector2 MinAnchor = Vector2.one * 0.5f;
         public Vector2 MaxAnchor = Vector2.one * 0.5f;
+        public Vector2 Pivot = Vector2.one * 0.5f;
         public Vector2 AnchoredPosition = Vector2.zero;
         public Vector2 Scale = Vector2.one;
         
