@@ -1,9 +1,11 @@
+using System;
 using BratyUI.Attributes;
 using BratyUI.Helpers;
 using UnityEngine;
 
 namespace BratyUI
 {
+    [ExecuteAlways]
     [RequireComponent(typeof(SpriteRenderer))]
     [DisallowMultipleComponent]
     public abstract class ComponentBase : MonoBehaviour
@@ -13,6 +15,21 @@ namespace BratyUI
         [SerializeField] private AnchorSettings _anchorSettings = new();
 
         protected virtual void Awake()
+        {
+            SetAnchoredPosition();
+        }
+
+        protected virtual void OnEnable()
+        {
+            BratyUIEvents.OnCameraUpdate += OnCameraUpdate;
+        }
+
+        protected virtual void OnDisable()
+        {
+            BratyUIEvents.OnCameraUpdate -= OnCameraUpdate;
+        }
+
+        private void OnCameraUpdate()
         {
             SetAnchoredPosition();
         }
@@ -35,10 +52,7 @@ namespace BratyUI
             var localScale = Transform.localScale;
             rendererSize.x /= localScale.x;
             rendererSize.y /= localScale.y;
-            Debug.Log(rendererSize);
             var result = AnchorHelper.GetComponentUIShape(_anchorSettings,rendererSize);
-            Debug.LogError(BratyCamera.Instance.ReferenceCamera.aspect);
-            Debug.Log(result);
             return result;
         }
 
