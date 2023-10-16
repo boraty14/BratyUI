@@ -35,7 +35,7 @@ namespace BratyUI.Helpers
             // set pivot
             else
             {
-                   
+                uiShape.Position.x += (0.5f - anchorSettings.Pivot.x) * uiShape.Scale.x;
             }
 
             if (anchorSettings.VerticalAnchorDistance > Tolerance)
@@ -47,9 +47,9 @@ namespace BratyUI.Helpers
             // set pivot
             else
             {
-                
+                uiShape.Position.y += (0.5f - anchorSettings.Pivot.y) * uiShape.Scale.y;
             }
-            
+
             return uiShape;
         }
     }
