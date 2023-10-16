@@ -5,9 +5,11 @@ namespace BratyUI
 {
     public abstract class ScrollBase : ComponentBase, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
+        [SerializeField] protected ScrollSettings ScrollSettings;
+        
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.LogError(eventData.position);
+            
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -16,6 +18,7 @@ namespace BratyUI
 
         public void OnDrag(PointerEventData eventData)
         {
+            
         }
     }
 }

@@ -8,10 +8,10 @@ namespace BratyUI
     {
         [SerializeField] [ShowOnly] private BoxCollider2D _collider;
 
-        protected override void OnValidate()
+        protected override void UpdateUI()
         {
-            base.OnValidate();
-            _collider.size = ComponentRenderer.size;
+            base.UpdateUI();
+            InteractionCollider.size = ComponentRenderer.size;
         }
 
         public BoxCollider2D InteractionCollider

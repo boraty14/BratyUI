@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 namespace BratyUI
 {
-    [ExecuteAlways]
     [RequireComponent(typeof(TextMeshPro))]
     public class TextInput : InteractableBase, IPointerClickHandler
     {
@@ -25,9 +24,9 @@ namespace BratyUI
             return _text.text;
         }
 
-        protected override void OnValidate()
+        protected override void UpdateUI()
         {
-            base.OnValidate();
+            base.UpdateUI();
             if (_text == null)
             {
                 _text = GetComponent<TextMeshPro>();

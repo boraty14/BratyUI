@@ -12,15 +12,9 @@ namespace BratyUI
         protected EButtonState ButtonState = EButtonState.Normal;
         public Action OnClicked;
 
-        protected override void Awake()
+        protected override void UpdateUI()
         {
-            base.Awake();
-            InitButton();
-        }
-
-        protected override void OnValidate()
-        {
-            base.OnValidate();
+            base.UpdateUI();
             InitButton();
         }
 

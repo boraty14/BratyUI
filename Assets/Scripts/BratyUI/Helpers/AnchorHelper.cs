@@ -6,14 +6,24 @@ namespace BratyUI.Helpers
     {
         private const float Tolerance = 0.01f;
 
-        public static UIShape GetComponentUIShape(AnchorSettings anchorSettings, Vector2 rendererSize)
+        public static UIShape GetComponentUIShape(AnchorSettings anchorSettings, Vector2 rendererSize,
+            Transform transform)
         {
             UIShape uiShape;
             Vector2 anchoredPosition;
             var referenceCamera = BratyCamera.Instance.ReferenceCamera;
             float orthographicSize = referenceCamera.orthographicSize;
+
+
             float verticalScreenSize = orthographicSize;
             float horizontalScreenSize = orthographicSize * referenceCamera.aspect;
+            var parent = transform.parent;
+            if (parent != null && parent.TryGetComponent(out ComponentBase component))
+            {
+                var size = component.ComponentRenderer.size;
+                verticalScreenSize = size.y * 0.5f;
+                horizontalScreenSize = size.x * 0.5f;
+            }
 
             // set position and pivot
             anchoredPosition.x = horizontalScreenSize * 2f * (anchorSettings.CurrentAnchor.x - 0.5f);

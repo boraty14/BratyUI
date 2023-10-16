@@ -5,11 +5,17 @@ pretty ok with other platforms as well.
 
 PAIN POINTS
 
+- CHILD ELEMENT!!!!!!!!!
 - SCROLL!!!
 - stretching image
 
-make everything have sprite renderer ???
+CONSIDERATIONS:
 
+- editor tooling for transform
+
+FIXS:
+
+- fix for singleton scene dependent camera
 
 2 -> Scroll
 
@@ -25,17 +31,16 @@ tree view
 
 4 -> Elements
 - Canvas +
-- Background
+- Background +
 - Toggle group / selection
-- Image (default sprite renderer)
+- Image (default sprite renderer) +
 - Tab
 - Dropdown
 - Slider
 - layouts
 - tooltip
-- mask
-- soft mask?
-- stretch
+- mask +
+- stretch +
 - anchor +
 
 5 -> Popup system
