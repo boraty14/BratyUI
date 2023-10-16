@@ -12,21 +12,32 @@ namespace BratyUI
         [SerializeField] [ShowOnly] private Transform _transform;
         [SerializeField] [ShowOnly] private SpriteRenderer _spriteRenderer;
         [SerializeField] protected AnchorSettings AnchorSettings = new();
+        private bool _isUpdatingUI;
 
         private void Awake()
         {
-            UpdateUI();
+            _isUpdatingUI = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (_isUpdatingUI)
+            {
+                UpdateUI();
+                _isUpdatingUI = false;
+            }
         }
 
         private void OnSpriteChange(SpriteRenderer spriteRenderer)
         {
-            UpdateUI();
+            _isUpdatingUI = true;
         }
 
         protected virtual void OnEnable()
         {
             _spriteRenderer.RegisterSpriteChangeCallback(OnSpriteChange);
             BratyUIEvents.OnCameraUpdate += OnCameraUpdate;
+            
         }
 
         protected virtual void OnDisable()
@@ -37,12 +48,12 @@ namespace BratyUI
 
         private void OnCameraUpdate()
         {
-            UpdateUI();
+            _isUpdatingUI = true;
         }
 
         private void OnValidate()
         {
-            UpdateUI();
+            _isUpdatingUI = true;
         }
 
         protected virtual void UpdateUI()
