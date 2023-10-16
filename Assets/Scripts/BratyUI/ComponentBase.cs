@@ -35,14 +35,14 @@ namespace BratyUI
 
         protected virtual void OnEnable()
         {
-            _spriteRenderer.RegisterSpriteChangeCallback(OnSpriteChange);
+            ComponentRenderer.RegisterSpriteChangeCallback(OnSpriteChange);
             BratyUIEvents.OnCameraUpdate += OnCameraUpdate;
             
         }
 
         protected virtual void OnDisable()
         {
-            _spriteRenderer.UnregisterSpriteChangeCallback(OnSpriteChange);
+            ComponentRenderer.UnregisterSpriteChangeCallback(OnSpriteChange);
             BratyUIEvents.OnCameraUpdate -= OnCameraUpdate;
         }
 
