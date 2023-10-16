@@ -24,9 +24,22 @@ namespace BratyUI
 
         private void SetAnchoredPosition()
         {
-            var uiShape = AnchorHelper.GetComponentUIShape(_anchorSettings);
+            var uiShape = GetComponentUIShape();
             Transform.position = uiShape.Position;
             Transform.localScale = uiShape.Scale;
+        }
+
+        public UIShape GetComponentUIShape()
+        {
+            Vector2 rendererSize = ComponentRenderer.bounds.size;
+            var localScale = Transform.localScale;
+            rendererSize.x /= localScale.x;
+            rendererSize.y /= localScale.y;
+            Debug.Log(rendererSize);
+            var result = AnchorHelper.GetComponentUIShape(_anchorSettings,rendererSize);
+            Debug.LogError(BratyCamera.Instance.ReferenceCamera.aspect);
+            Debug.Log(result);
+            return result;
         }
 
         public Transform Transform

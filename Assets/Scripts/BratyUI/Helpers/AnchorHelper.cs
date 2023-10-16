@@ -6,40 +6,40 @@ namespace BratyUI.Helpers
     {
         private const float Tolerance = 0.01f;
 
-        public static UIShape GetComponentUIShape(AnchorSettings anchorSettings)
+        public static UIShape GetComponentUIShape(AnchorSettings anchorSettings, Vector2 rendererSize)
         {
             UIShape uiShape;
             Vector2 anchoredPosition;
             var referenceCamera = BratyCamera.Instance.ReferenceCamera;
             float orthographicSize = referenceCamera.orthographicSize;
-            anchoredPosition.x = referenceCamera.aspect * orthographicSize * 2f * (anchorSettings.CurrentAnchor.x - 0.5f);
+            float verticalScreenSize = orthographicSize;
+            float horizontalScreenSize = orthographicSize * referenceCamera.aspect;
+            
+            // set position
+            anchoredPosition.x = horizontalScreenSize * 2f * (anchorSettings.CurrentAnchor.x - 0.5f);
             anchoredPosition.x += anchorSettings.AnchoredPosition.x;
-            anchoredPosition.y = orthographicSize * 2f * (anchorSettings.CurrentAnchor.y - 0.5f);
+            anchoredPosition.y = verticalScreenSize * 2f * (anchorSettings.CurrentAnchor.y - 0.5f);
             anchoredPosition.y += anchorSettings.AnchoredPosition.y;
             uiShape.Position = anchoredPosition;
-            uiShape.Scale = Vector3.one;
             
-            if (!IsEqual(anchorSettings.MinAnchor.x, anchorSettings.MaxAnchor.x))
+            // set scale
+            uiShape.Scale = new Vector3(anchorSettings.Scale.x,anchorSettings.Scale.y,1f);
+
+            if (anchorSettings.HorizontalAnchorDistance > Tolerance)
             {
+                float horizontalItemSize = anchorSettings.HorizontalAnchorDistance * horizontalScreenSize * 2f;
+                float horizontalScale = horizontalItemSize / rendererSize.x;
+                uiShape.Scale.x *= horizontalScale;
+            }
+            
+            if (anchorSettings.VerticalAnchorDistance > Tolerance)
+            {
+                float verticalItemSize = anchorSettings.VerticalAnchorDistance * verticalScreenSize * 2f;
+                float verticalScale = verticalItemSize / rendererSize.y;
+                uiShape.Scale.y *= verticalScale;
                 
             }
-
-            if (!IsEqual(anchorSettings.MinAnchor.y, anchorSettings.MaxAnchor.y))
-            {
-            }
-
             return uiShape;
         }
-
-        private static bool IsEqual(float a, float b)
-        {
-            return Mathf.Abs(a - b) < Tolerance;
-        }
-    }
-
-    public struct UIShape
-    {
-        public Vector3 Position;
-        public Vector3 Scale;
     }
 }
