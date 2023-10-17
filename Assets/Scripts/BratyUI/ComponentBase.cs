@@ -85,6 +85,12 @@ namespace BratyUI
             return result;
         }
 
+        public void ChangePosition(Vector2 delta)
+        {
+            AnchorSettings.AnchoredPosition += delta;
+            _isUpdatingUI = true;
+        }
+
         public Transform Transform
         {
             get

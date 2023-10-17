@@ -14,6 +14,7 @@ CONSIDERATIONS:
 
 FIXS:
 
+- fix render depth issue
 - fix for singleton scene dependent camera
 
 2 -> Scroll

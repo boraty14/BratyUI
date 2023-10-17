@@ -51,6 +51,15 @@ namespace BratyUI.Editor
             CreateComponent(go, menuCommand);
         }
 
+        [MenuItem("GameObject/BratyUI/ListView", false, 10)]
+        private static void CreateListView(MenuCommand menuCommand)
+        {
+            // Create a custom game object
+            GameObject go = new GameObject("ListView");
+            go.AddComponent<ListView>();
+            CreateComponent(go, menuCommand);
+        }
+
         private static void CreateComponent(GameObject go, MenuCommand menuCommand)
         {
             // Ensure it gets reparented if this was a context click (otherwise does nothing)
