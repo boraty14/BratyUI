@@ -12,7 +12,6 @@ namespace BratyUI
         [SerializeField] [ShowOnly] private RectTransform _rectTransform;
         [SerializeField] private string _placeHolder;
         private TouchScreenKeyboard _keyboard;
-        private BoxCollider2D _inputCollider;
 
         public string GetText()
         {
@@ -38,17 +37,10 @@ namespace BratyUI
             {
                 _rectTransform = Transform as RectTransform;
             }
-
-            if (_inputCollider == null)
-            {
-                _inputCollider = InteractionCollider as BoxCollider2D;
-            }
         }
 
         private void Update()
         {
-            _inputCollider.size = _rectTransform.sizeDelta;
-
             if (_keyboard == null)
             {
                 return;
