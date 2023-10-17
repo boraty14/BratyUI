@@ -662,7 +662,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 22.222223
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   _collider: {fileID: 1531255269}
   ScrollSettings:
     ScrollDirection: 0
-    ScrollSpeed: 1
+    ScrollSlowingAcceleration: 10
     IsElastic: 1
     SlowingFactor: 0
   ScrollArea: {fileID: 245147291}

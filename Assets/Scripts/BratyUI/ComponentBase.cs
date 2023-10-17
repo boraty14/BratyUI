@@ -14,7 +14,7 @@ namespace BratyUI
         [SerializeField] protected AnchorSettings AnchorSettings = new();
         private bool _isUpdatingUI;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _isUpdatingUI = true;
         }

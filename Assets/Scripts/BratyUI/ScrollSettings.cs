@@ -7,7 +7,7 @@ namespace BratyUI
     public class ScrollSettings
     {
         public EScrollDirection ScrollDirection = EScrollDirection.Vertical;
-        public float ScrollSpeed = 1f;
+        public float ScrollSlowingAcceleration = 10f;
         public bool IsElastic = true;
         [Range(0.05f, 1f)] public float SlowingFactor;
     }
