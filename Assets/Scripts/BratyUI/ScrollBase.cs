@@ -9,6 +9,15 @@ namespace BratyUI
         [SerializeField] protected Image ScrollArea;
         private Vector2 _lastDrag;
         private bool _isDragging;
+        private float _scrollAreaLength;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            // todo calculate _scrollAreaLenght
+
+            _scrollAreaLength = 10f;
+        }
 
         protected override void OnEnable()
         {
@@ -22,7 +31,8 @@ namespace BratyUI
             if (ScrollSettings.IsElastic && !_isDragging && _lastDrag.sqrMagnitude > 0f)
             {
                 MoveScrollArea(_lastDrag);
-                _lastDrag = Vector2.Lerp(_lastDrag, Vector2.zero, Time.deltaTime * ScrollSettings.ScrollSlowingAcceleration);
+                _lastDrag = Vector2.Lerp(_lastDrag, Vector2.zero,
+                    Time.deltaTime * ScrollSettings.ScrollSlowingAcceleration);
                 if (_lastDrag.sqrMagnitude < 0.05f)
                 {
                     _lastDrag = Vector2.zero;
